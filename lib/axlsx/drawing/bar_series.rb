@@ -54,12 +54,18 @@ module Axlsx
     def to_xml_string(str = '')
       super(str) do
 
-        colors.each_with_index do |c, index|
-          str << '<c:dPt>'
-          str << ('<c:idx val="' << index.to_s << '"/>')
-          str << '<c:spPr><a:solidFill>'
-          str << ('<a:srgbClr val="' << c << '"/>')
-          str << '</a:solidFill></c:spPr></c:dPt>'
+        if colors.length == 1
+          str_inner << '<c:spPr><a:solidFill>'
+          str_inner << '<a:srgbClr val="' << colors[0] << '"/>'
+          str_inner << '</a:solidFill></c:spPr>'
+        else
+          colors.each_with_index do |c, index|
+            str_inner << '<c:dPt>'
+            str_inner << '<c:idx val="' << index.to_s << '"/>'
+            str_inner << '<c:spPr><a:solidFill>'
+            str_inner << '<a:srgbClr val="' << c << '"/>'
+            str_inner << '</a:solidFill></c:spPr></c:dPt>'
+          end
         end
 
         @labels.to_xml_string(str) unless @labels.nil?
