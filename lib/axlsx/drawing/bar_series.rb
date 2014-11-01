@@ -52,7 +52,7 @@ module Axlsx
     # @param [String] str
     # @return [String]
     def to_xml_string(str = '')
-      super(str) do
+      super(str) do |str_inner|
 
         if colors.length == 1
           str_inner << '<c:spPr><a:solidFill>'
