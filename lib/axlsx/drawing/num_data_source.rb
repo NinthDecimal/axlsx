@@ -49,7 +49,7 @@ module Axlsx
       str << ('<c:' << tag_name.to_s << '>')
       if @f
         str << ('<c:' << @ref_tag_name.to_s << '>')
-        str << ('<c:f>' << @f.to_s << '</c:f>')
+        str << ('<c:f>(' << @f.to_s << ')</c:f>')
       end
       @data.to_xml_string str
       if @f
